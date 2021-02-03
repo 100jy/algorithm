@@ -1,1 +1,2 @@
-print((1,2) +  (1,2))
+from collections import defaultdict
+a= defaultdict(int)
