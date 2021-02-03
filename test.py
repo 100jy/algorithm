@@ -1,2 +1,5 @@
 from collections import defaultdict
-a= defaultdict(int)
+board = [0,0,0,0]
+visit = [[0] * len(board) for x in range(len(board))]
+visit[0][0]=1
+print(visit)

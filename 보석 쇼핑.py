@@ -45,5 +45,3 @@ def solution(gems):
             bag_dict[gems[r_pointer-1]] += 1
 
     return answer
-
-solution(	["ZZZ", "YYY", "NNNN", "YYY", "BBB"])
