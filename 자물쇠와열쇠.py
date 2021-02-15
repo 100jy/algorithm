@@ -34,35 +34,43 @@ def solution(key, lock):
 
         return x, y
 
-
-    for degree in [90,180,270,360]:
+    for degree in [90, 180, 270, 360]:
         for v in range(-(N-1), M):
             for h in range(-(N-1), M):
-                holes = len(hole_axis)
-                rest_keys = []
-                for axis in key_axis:
-                    x, y = axis
-                    # 회전이동
-                    x_new, y_new = rotate(x, y, degree)
-                    # 0 ~ n-m 좌우상하로 키좌표이동
-                    x_new, y_new = x_new + h, y_new + v
-                    # 홈과 키좌표 다같고
-                    if (x_new, y_new) in hole_axis:
-                        holes-=1
-                    else:
-                        rest_keys.append((x_new, y_new))
-                # 키가 다있으면
-                if holes == 0 :
-                    # 남는키가 없거나 전부 범위밖이면
-                    if rest_keys == []:
-                        return True
-                    for rest_key in rest_keys:
-                        x, y = rest_key
-                        # 안맞는 키있으면 다음 탐색
-                        if 0<=x<M and 0<=y<M:
-                            break
-                        return True
+                #for dir in [1, 0]:
+                    holes = len(hole_axis)
+                    rest_keys = []
+                    for axis in key_axis:
+                        x, y = axis
+                        if dir:
+                            # 회전이동
+                            x_new, y_new = rotate(x, y, degree)
+                            # 0 ~ n-m 좌우상하로 키좌표이동
+                            x_new, y_new = x_new + h, y_new + v
+                        else:
+                            # 0 ~ n-m 좌우상하로 키좌표이동
+                            x_new, y_new = x + h, y + v
+                            # 회전이동
+                            x_new, y_new = rotate(x_new, x_new, degree)
+
+                        # 홈과 키좌표 다같고
+                        if (x_new, y_new) in hole_axis:
+                            holes-=1
+                        else:
+                            rest_keys.append((x_new, y_new))
+                    # 키가 다있으면
+                    if holes == 0:
+                        print(rest_keys)
+                        # 남는키가 없거나 전부 범위밖이면
+                        if rest_keys == []:
+                            return True
+                        for rest_key in rest_keys:
+                            x, y = rest_key
+                            # 안맞는 키있으면 다음 탐색
+                            if 0<=x<M and 0<=y<M:
+                                break
+                            return True
 
     return answer
 
-solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]])
+solution([[0, 0, 0], [1, 0, 0], [1, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]])
