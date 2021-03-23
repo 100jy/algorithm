@@ -2,7 +2,6 @@ from collections import deque
 
 
 def solution(play_time, adv_time, logs):
-    answer = ''
 
     def get_idx(time):
         h = int(time[:2])
@@ -17,16 +16,20 @@ def solution(play_time, adv_time, logs):
     for time in logs:
         start = get_idx(time[:8])
         end = get_idx(time[9:])
-        for i in range(start, end):
+        for i in range(start, end+1):
             total_sum[i] += 1
+
     # 윈도우 이동하면서
     end_point = get_idx(adv_time)
-    start_point = 0
-    window = deque(total_sum[:(end_point+1)])
+    start_point = 1
+
+    window = deque(total_sum[1:(end_point+1)])
     total_sum = deque(total_sum[(end_point+1):])
     sum_time = sum(window)
+
     answer = start_point
     max_sum = sum_time
+
     # 맥시멈 구간 찾는다?
     while total_sum:
         start_point += 1
@@ -52,5 +55,4 @@ def solution(play_time, adv_time, logs):
 
         return '{}:{}:{}'.format(zeros(h), zeros(m), zeros(s))
 
-    print(inverse(answer))
     return inverse(answer)

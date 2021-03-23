@@ -1,5 +1,8 @@
 def solution(lines):
     answer = 0
+    # 1초간 처리하는 최대 프로세스
+
+    import heapq
 
     # 절대 시간 구해주기
     def get_abs_time(log):
@@ -19,32 +22,21 @@ def solution(lines):
 
         return y + m + d + h + M + s, pt
 
-    # 특정로그를 포함하는 1초구간중
-    # 최대값은 종료시간부터 1초간의 구간을 세주면 된다.
-    # 종료시간 순으로 정렬되어 있기때문
-
-    for idx, log in enumerate(lines):
+    # 끝시간 힙에 넣고
+    # 시작시간 보다 1초 이상 작은 것들 다뺴주고 카운트
+    heap = []
+    for log in lines:
         end_time, pt = get_abs_time(log)
-        window_end = end_time + 1 - 0.001
-        # end_time부터 1초간의 구간에 들어오는 로그의 개수를 세준다.
-        cnt = 1
+        start_time = end_time - pt + 1
 
-        for next in lines[idx+1:]:
-            next_end, pt = get_abs_time(next)
-            start_time = next_end - pt + 0.001
-            # start_time이 window_end내에 있다면
-            if window_end >= start_time:
-                cnt += 1
-        if cnt > answer:
-            answer = cnt
+        heap.append()
+
+        while start_time - heap[0] > 1:
+            heapq.heappop(heap)
+
+        if len(heap)
+
+
+
 
     return answer
-
-#############################################################
-# 먼저 문제 읽고
-# 로직 생각해서
-# 검증하고
-# 계획해서 
-# 코딩
-# 디버깅
-##############################################################
