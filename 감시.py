@@ -100,7 +100,7 @@ def get_min(board, space, cctv, d):
         (x, y, type) = cctv[d]
         # 5번유형은 한번만 계산
         if type == 5:
-            if i >0:
+            if i > 0:
                 continue
         tmp_space = space.copy()
         new_space = watch(x, y, type, tmp_space, board, i)
